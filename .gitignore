@@ -1,0 +1,10 @@
+/storage/framework/cache/*
+/vendor
+/.idea
+/node_modules
+npm-debug.log
+yarn-error.log
+Homestead.json
+Homestead.yaml
+.env
+.DS_Store
