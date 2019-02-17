@@ -21,9 +21,13 @@ try {
 
 $app = new Laravel\Lumen\Application(dirname(__DIR__));
 
-// $app->withFacades();
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 
-// $app->withEloquent();
+$app->configure('database');
+
+$app->withFacades();
+
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
