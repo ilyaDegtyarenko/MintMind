@@ -121,20 +121,20 @@ return [
 
         'client' => 'predis',
 
-        'cluster' => env('REDIS_CLUSTER', false),
+        'cluster' => env('REDIS_CLUSTER'),
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => env('REDIS_DB', 0),
+            'host' => env('REDIS_HOST'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT'),
+            'database' => env('REDIS_DB'),
         ],
 
         'cache' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => env('REDIS_CACHE_DB', 1),
+            'host' => env('REDIS_HOST'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT'),
+            'database' => env('REDIS_CACHE_DB'),
         ],
 
     ],

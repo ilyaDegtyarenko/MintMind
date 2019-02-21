@@ -21,13 +21,8 @@ try {
 
 $app = new Laravel\Lumen\Application(dirname(__DIR__));
 
-$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
-
 $app->configure('database');
-
-$app->withFacades();
-
-$app->withEloquent();
+$app->configure('cache');
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +36,6 @@ $app->withEloquent();
 */
 
 $app->singleton(Illuminate\Contracts\Debug\ExceptionHandler::class, App\Exceptions\Handler::class);
-
 $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::class);
 
 /*
@@ -74,9 +68,15 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+//$app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+
+$app->withFacades();
+
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
-], function ($router) {
+], function ($app) {
     require __DIR__ . '/../routes/web.php';
 });
 
