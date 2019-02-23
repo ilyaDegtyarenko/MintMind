@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81b41c3adb1064bc72e471977e0676fb",
+    "content-hash": "353307106aa651c51f1d2f61b9becec0",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1786,6 +1786,53 @@
                 "serialize"
             ],
             "time": "2019-01-14T14:45:33+00:00"
+        },
+        {
+            "name": "pearl/lumen-request-validate",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pearlkrishn/lumen-request-validate.git",
+                "reference": "b5d7d20bcbdc6dbef5efb5e00d814c6f30173f7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pearlkrishn/lumen-request-validate/zipball/b5d7d20bcbdc6dbef5efb5e00d814c6f30173f7a",
+                "reference": "b5d7d20bcbdc6dbef5efb5e00d814c6f30173f7a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.7.*",
+                "laravel/lumen-framework": "5.7.*",
+                "php": ">=7.1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pearl\\RequestValidate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "pearlkrishn",
+                    "email": "pearlkrishn@gmail.com"
+                }
+            ],
+            "description": "Lumen doesn't have form request validator seperatly. This package helps developers to segregate the validation layer from the controller to a separate dedicated class",
+            "keywords": [
+                "form-request",
+                "form-request-validation",
+                "form-validation",
+                "lumen",
+                "lumen-package",
+                "lumen-request-validate",
+                "validation"
+            ],
+            "time": "2018-09-25T14:25:08+00:00"
         },
         {
             "name": "predis/predis",
