@@ -24,7 +24,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'personal_token' => encrypt(generateHash()),
+            'personal_token' => generateHash(),
             'ip' => $request->ip()
         ]);
 
@@ -58,13 +58,14 @@ class AuthController extends Controller
     }
 
     /**
-     * Flush auth token.
+     * Flush user tokens.
      *
      * @return bool
      */
     public static function logout()
     {
         app('cache')->forget('users:' . Auth::user()->id . ':auth_token');
+        app('cache')->forget('users:' . Auth::user()->id . ':personal_token');
 
         return response()->json(null, 204);
     }
@@ -91,7 +92,8 @@ class AuthController extends Controller
         app('cache')->set('users:' . $user->id . ':auth_token', $authToken, $expirationTime);
 
         return response()->json([
-            'auth_token' => encrypt($authToken)
+            'auth_token' => $authToken,
+            'xsrf_token' => Hash::make($user->personal_token)
         ], $code);
     }
 }

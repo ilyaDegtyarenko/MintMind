@@ -25,4 +25,3 @@ $app->get('/', 'IndexController@index');
 $app->group(['middleware' => ['auth', 'csrf']], function () use ($app) {
 
 });
-

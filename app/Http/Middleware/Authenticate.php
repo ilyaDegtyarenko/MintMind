@@ -48,13 +48,11 @@ class Authenticate
         if (!$authToken || !$this->tokenComparison($authToken)) {
             AuthController::logout();
 
-            return response()->json('Token mismatch or empty.', 401);
+            return response()->json('Auth token not found or does\'t match.', 401);
         }
 
         try {
-            $token = decrypt($authToken);
-
-            JWT::decode($token, env('JWT_SECRET'), [env('JWT_ALGORITHM')]);
+            JWT::decode($authToken, env('JWT_SECRET'), [env('JWT_ALGORITHM')]);
         } catch (ExpiredException $e) {
             AuthController::logout();
 
@@ -80,12 +78,6 @@ class Authenticate
      */
     private function tokenComparison(string $token): bool
     {
-        try {
-            $token = decrypt($token);
-        } catch (\Throwable $exception) {
-            return false;
-        }
-
         $userAuthToken = app('cache')->get('users:' . $this->auth->user()->id . ':auth_token');
 
         if (!$userAuthToken) return false;
