@@ -57,6 +57,7 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'csrf' => App\Http\Middleware\VerifyCsrfToken::class,
     'guest' => App\Http\Middleware\RedirectIfAuthenticated::class,
 ]);
 
