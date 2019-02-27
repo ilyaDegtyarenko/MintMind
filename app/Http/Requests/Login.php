@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Pearl\RequestValidate\RequestAbstract;
 
 class Login extends RequestAbstract
@@ -13,7 +14,7 @@ class Login extends RequestAbstract
      */
     public function authorize()
     {
-        return auth()->guest();
+        return Auth::guest();
     }
 
     /**
@@ -25,7 +26,8 @@ class Login extends RequestAbstract
     {
         return [
             'email' => 'required|email|max:240',
-            'password' => 'required|min:7|max:240'
+            'password' => 'required|min:8|max:240',
+            'remember' => 'boolean'
         ];
     }
 
@@ -52,13 +54,14 @@ class Login extends RequestAbstract
             'password.min' => trans_choice('validation.size', 'plural', [
                 'attribute' => trans_choice('attributes.password', 'singular'),
                 'condition' => trans('validation.less_than'),
-                'count' => 7
+                'count' => 8
             ]),
             'password.max' => trans_choice('validation.size', 'plural', [
                 'attribute' => trans_choice('attributes.password', 'singular'),
                 'condition' => trans('validation.more_than'),
                 'count' => 240
             ]),
+            'remember.boolean' => trans('validation.remember'),
         ];
     }
 }

@@ -31,7 +31,7 @@ class FilterInput
 
             if (in_array($key, $this->except, true) || !is_string($value)) continue;
 
-            $request->merge([$key => $this->_filterInput($value)]);
+            $request->merge([$key => $this->filterInput($value)]);
         }
 
         return $next($request);
@@ -43,7 +43,7 @@ class FilterInput
      * @param $value
      * @return string
      */
-    private function _filterInput($value)
+    private function filterInput($value)
     {
         return trim(strip_tags($value));
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Pearl\RequestValidate\RequestAbstract;
 
 class Registration extends RequestAbstract
@@ -14,7 +14,7 @@ class Registration extends RequestAbstract
      */
     public function authorize()
     {
-        return auth()->guest();
+        return Auth::guest();
     }
 
     /**
@@ -25,9 +25,9 @@ class Registration extends RequestAbstract
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:240',
+            'name' => 'required|min:2|max:240|regex:/^([a-zA-Zа-яА-Я]+)([0-9 ._]*)$/u',
             'email' => 'required|email|unique:users|max:240',
-            'password' => 'required|confirmed|min:7|max:240|regex:/^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[#$^+=!*()@%&]).{7,240}$/u',
+            'password' => 'required|confirmed|min:8|max:240|regex:/^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[#$^+=!*()@%&]).{8,240}$/u',
             'agreement' => 'accepted'
         ];
     }
@@ -53,6 +53,7 @@ class Registration extends RequestAbstract
                 'condition' => trans('validation.more_than'),
                 'count' => 240
             ]),
+            'name.regex' => trans('validation.name_regex'),
             'email.required' => trans('validation.required', [
                 'attribute' => mb_strtolower(trans_choice('attributes.email', 'singular-accusative')),
             ]),
@@ -71,7 +72,7 @@ class Registration extends RequestAbstract
             'password.min' => trans_choice('validation.size', 'plural', [
                 'attribute' => trans_choice('attributes.password', 'singular'),
                 'condition' => trans('validation.less_than'),
-                'count' => 7
+                'count' => 8
             ]),
             'password.max' => trans_choice('validation.size', 'plural', [
                 'attribute' => trans_choice('attributes.password', 'singular'),
