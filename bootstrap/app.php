@@ -24,6 +24,8 @@ $app = new Laravel\Lumen\Application(dirname(__DIR__));
 $app->configure('database');
 $app->configure('cache');
 
+$app->make('queue');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -54,6 +56,8 @@ $app->middleware([
 ]);
 
 $app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'guest' => App\Http\Middleware\RedirectIfAuthenticated::class,
 ]);
 
 /*

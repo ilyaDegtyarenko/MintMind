@@ -3,7 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Http\Controllers\AuthController;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Firebase\JWT\JWT;
+use Firebase\JWT\ExpiredException;
 
 class Authenticate
 {
@@ -17,7 +21,7 @@ class Authenticate
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @param  \Illuminate\Contracts\Auth\Factory $auth
      * @return void
      */
     public function __construct(Auth $auth)
@@ -28,17 +32,64 @@ class Authenticate
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
-     * @return mixed
+     * @param $request
+     * @param Closure $next
+     * @param null $guard
+     * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory|mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+            return response()->json('Unauthorized.', 401);
+        }
+
+        $authToken = $request->header('x-auth-token');
+
+        if (!$authToken || !$this->tokenComparison($authToken)) {
+            AuthController::logout();
+
+            return response()->json('Token mismatch or empty.', 401);
+        }
+
+        try {
+            $token = decrypt($authToken);
+
+            JWT::decode($token, env('JWT_SECRET'), [env('JWT_ALGORITHM')]);
+        } catch (ExpiredException $e) {
+            AuthController::logout();
+
+            return response()->json('Provided auth token is expired.', 419);
+        } catch (\Exception $e) {
+            AuthController::logout();
+
+            $message = 'An error while decoding token.';
+
+            report($message, $e->getMessage());
+
+            return response()->json($message, 401);
         }
 
         return $next($request);
+    }
+
+    /**
+     * Determine whether user token matches passed token.
+     *
+     * @param string $token
+     * @return bool
+     */
+    private function tokenComparison(string $token): bool
+    {
+        try {
+            $token = decrypt($token);
+        } catch (\Throwable $exception) {
+            return false;
+        }
+
+        $userAuthToken = app('cache')->get('users:' . $this->auth->user()->id . ':auth_token');
+
+        if (!$userAuthToken) return false;
+
+        return hash_equals($userAuthToken, $token);
     }
 }

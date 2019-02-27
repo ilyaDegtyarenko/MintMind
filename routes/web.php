@@ -11,6 +11,18 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+/*Auth routes.*/
+$app->group(['prefix' => 'auth'], function () use ($app) {
+    $app->post('registration', ['middleware' => 'guest', 'uses' => 'AuthController@register']);
+    $app->post('login', ['middleware' => 'guest', 'uses' => 'AuthController@login']);
+    $app->post('logout', ['middleware' => 'auth', 'uses' => 'AuthController@logout']);
 });
+
+/*Index route.*/
+$app->get('/', 'IndexController@index');
+
+/*Routes for authorized users.*/
+$app->group(['middleware' => ['auth', 'csrf']], function () use ($app) {
+
+});
+
