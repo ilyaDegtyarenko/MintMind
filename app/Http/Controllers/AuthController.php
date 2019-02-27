@@ -65,7 +65,6 @@ class AuthController extends Controller
     public static function logout()
     {
         app('cache')->forget('users:' . Auth::user()->id . ':auth_token');
-        app('cache')->forget('users:' . Auth::user()->id . ':personal_token');
 
         return response()->json(null, 204);
     }
