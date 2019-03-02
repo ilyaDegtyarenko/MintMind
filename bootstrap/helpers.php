@@ -71,7 +71,7 @@ if (!function_exists('mix')) {
 
     /**
      * Get the path to a versioned Mix file.
-     * 
+     *
      * @param string $path
      * @param string $manifestDirectory
      * @return string
