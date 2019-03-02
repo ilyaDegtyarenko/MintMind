@@ -24,8 +24,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'personal_token' => generateHash(),
-            'ip' => $request->ip()
+            'personal_token' => generate_hash()
         ]);
 
         return $this->respondWithAuthToken($user, (int)$request->input('remember'), 201);

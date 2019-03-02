@@ -80,7 +80,7 @@ class VerifyCsrfToken
     {
         $user = Auth::user();
 
-        $user->update(['personal_token' => generateHash()]);
+        $user->update(['personal_token' => generate_hash()]);
 
         AuthController::logout();
 

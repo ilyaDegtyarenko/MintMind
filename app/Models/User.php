@@ -25,7 +25,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'ip',
         'name',
         'email',
         'password',
@@ -38,7 +37,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'ip',
         'password',
         'personal_token'
     ];
