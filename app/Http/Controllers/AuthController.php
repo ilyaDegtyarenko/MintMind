@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Repositories\UserRepository;
 use App\Http\Requests\Login;
 use App\Http\Requests\Registration;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +38,7 @@ class AuthController extends Controller
      */
     public function login(Login $request)
     {
-        $user = UserRepository::findByEmail($request->input('email'));
+        $user = User::where('email', $request->input('email'))->first();
 
         if (!$user) {
             return response()->json([

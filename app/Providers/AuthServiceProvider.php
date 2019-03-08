@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\Repositories\UserRepository;
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
 use Firebase\JWT\ExpiredException;
@@ -44,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
 
                 $request->merge(['credentials' => $credentials]);
 
-                return UserRepository::findById($userId);
+                return User::find($userId);
             } catch (ExpiredException $exception) {
                 return null;
             } catch (\Exception $exception) {

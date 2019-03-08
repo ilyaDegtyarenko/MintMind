@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 class IndexController extends Controller
 {
+    /**
+     * Return app view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
-        dd('index');
+        $authUser = Auth::user();
+
+        return view('app', compact('authUser'));
     }
 }

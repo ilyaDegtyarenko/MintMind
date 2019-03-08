@@ -19,7 +19,7 @@ $app->group(['prefix' => 'auth'], function () use ($app) {
 });
 
 /*Index route.*/
-$app->get('/', 'IndexController@index');
+$app->get('{any:.*}', 'IndexController@index');
 
 /*Routes for authorized users.*/
 $app->group(['middleware' => ['auth', 'csrf']], function () use ($app) {
