@@ -20,7 +20,7 @@ mix
         extensions: ['.js', '.scss', '.vue'],
         alias: {
             '@js': path.resolve('./resources/js'),
-            '@sass': path.resolve('./resources/sass'),
+            '@scss': path.resolve('./resources/scss'),
             '@components': path.resolve('./resources/js/components')
         }
     },

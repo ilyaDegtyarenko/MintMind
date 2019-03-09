@@ -7,8 +7,8 @@ import {auth as Auth, guest as Guest, test} from './middleware';
 import Index from '../components/auth/Index';
 import Login from '@components/auth/Login';
 import Register from '@components/auth/Register';
-import SurveyList from '@components/survey/List';
-import CurrentSurvey from '@components/survey/Current';
+import SurveyList from '@components/content/SurveyList';
+import CurrentSurvey from '@components/content/CurrentSurvey';
 import PageNotFound from '@components/errors/PageNotFound';
 
 Vue.use(VueRouter);
