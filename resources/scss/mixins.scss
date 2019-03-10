@@ -1,0 +1,143 @@
+@function contains($list, $item) {
+  $result: false;
+  @each $_item in $list {
+    @if $_item == $item {
+      $result: true;
+    }
+  }
+  @return $result;
+}
+
+@mixin border-radius($prop) {
+  -webkit-border-radius: $prop;
+  -moz-border-radius: $prop;
+  border-radius: $prop;
+}
+
+@mixin box-shadow($props...) {
+  -webkit-box-shadow: $props;
+  -moz-box-shadow: $props;
+  box-shadow: $props;
+}
+
+@mixin important-box-shadow($props...) {
+  -webkit-box-shadow: $props !important;
+  -moz-box-shadow: $props !important;
+  box-shadow: $props !important;
+}
+
+@mixin transition($props...) {
+  -webkit-transition: $props;
+  -moz-transition: $props;
+  -ms-transition: $props;
+  -o-transition: $props;
+  transition: $props;
+}
+
+@mixin transform($props...) {
+  -webkit-transform: $props;
+  -moz-transform: $props;
+  -ms-transform: $props;
+  -o-transform: $props;
+  transform: $props;
+}
+
+@mixin transform-origin($props...) {
+  -webkit-transform-origin: $props;
+  -moz-transform-origin: $props;
+  -ms-transform-origin: $props;
+  -o-transform-origin: $props;
+  transform-origin: $props;
+}
+
+@mixin user-select($prop:text) {
+  -webkit-user-select: $prop;
+  -moz-user-select: $prop;
+  -ms-user-select: $prop;
+  user-select: $prop;
+}
+
+@mixin animation($props...) {
+  -webkit-animation: $props;
+  -o-animation: $props;
+  animation: $props;
+}
+
+@mixin animation-name($prop) {
+  -webkit-animation-name: $prop;
+  -moz-animation-name: $prop;
+  -o-animation-name: $prop;
+  animation-name: $prop;
+}
+
+@mixin animation-delay($prop) {
+  -webkit-animation-delay: $prop;
+  -moz-animation-delay: $prop;
+  -o-animation-delay: $prop;
+  animation-delay: $prop;
+}
+
+@mixin animation-duration($prop) {
+  -webkit-animation-duration: $prop;
+  -moz-animation-duration: $prop;
+  -o-animation-duration: $prop;
+  animation-duration: $prop;
+}
+
+@mixin animation-iteration-count($prop) {
+  -webkit-animation-iteration-count: $prop;
+  -moz-animation-iteration-count: $prop;
+  -o-animation-iteration-count: $prop;
+  animation-iteration-count: $prop;
+}
+
+@mixin writing-mode($prop) {
+  writing-mode: $prop;
+  -ms-writing-mode: $prop;
+  -webkit-writing-mode: $prop;
+}
+
+@mixin background-clip($prop) {
+  -webkit-background-clip: $prop;
+  -moz-background-clip: $prop;
+  background-clip: $prop;
+}
+
+@mixin linear-gradient($attribute, $props...) {
+  $available-attributes: background, background-color, color;
+
+  @if (contains($available-attributes, $attribute) == false) {
+    $props: join(($attribute), $props);
+    $attribute: background;
+    @warn 'The default attribute is set. (background)';
+    @debug #{$attribute}+','+#{$props};
+  }
+
+  #{$attribute}: -webkit-linear-gradient($props);
+  #{$attribute}: -moz-linear-gradient($props);
+  #{$attribute}: -ms-linear-gradient($props);
+  #{$attribute}: -o-linear-gradient($props);
+  #{$attribute}: linear-gradient($props);
+
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-khtml-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @-o-keyframes #{$name}{
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
