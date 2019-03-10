@@ -12,19 +12,48 @@
             {{$translate.registration}}
         </template>
 
-        <form-field name="name" :label="$translate.name" :error-message="null"></form-field>
-        <form-field name="email" :label="$translate.email" :error-message="null"></form-field>
-        <form-field name="password" :label="$translate.password" :error-message="null"></form-field>
-        <form-field name="password_confirmation" :label="$translate.password_confirmation" :error-message="null"></form-field>
+        <form-field v-model="formData.name"
+                    name="name"
+                    :label="$translate.name"
+                    :error-message="errors.name"
+                    @input="errors.name = null">
+        </form-field>
+
+        <form-field v-model="formData.email"
+                    type="email"
+                    name="email"
+                    :label="$translate.email"
+                    :error-message="errors.email"
+                    @input="errors.email = null">
+        </form-field>
+
+        <form-field v-model="formData.password"
+                    type="password"
+                    name="password"
+                    :label="$translate.password"
+                    :error-message="errors.password"
+                    @input="errors.password = null">
+        </form-field>
+
+        <form-field v-model="formData.password_confirmation"
+                    type="password"
+                    name="password_confirmation"
+                    :label="$translate.password_confirmation"
+                    :error-message="errors.password_confirmation"
+                    @input="errors.password_confirmation = null">
+        </form-field>
 
         <div class="checkbox-wrapper">
-            <form-checkbox name="agreement" :label="$translate.agreement" :error-message="null"></form-checkbox>
+            <form-checkbox name="agreement"
+                           :label="$translate.agreement"
+                           :error-message="errors.agreement"
+                           @change="(boolean) => {formData.agreement = boolean; errors.agreement = null;}"></form-checkbox>
+
         </div>
 
         <button type="button"
                 class="mm-btn mm-btn-medium mm-btn-dark"
-                v-text="$translate.registration"
-                @submit.prevent="alert()"></button>
+                v-text="$translate.registration" @click="register()"></button>
     </app-form>
 </template>
 
@@ -33,8 +62,6 @@
     import FormField from '@components/ui/FormField';
     import FormCheckbox from '@components/ui/FormCheckbox';
 
-    import {mapGetters, mapActions} from 'vuex';
-
     export default {
         name: 'Register',
         components: {
@@ -42,24 +69,33 @@
             'form-field': FormField,
             'form-checkbox': FormCheckbox
         },
-        computed: {
-            ...mapGetters('AUTH_MODULE', {
-                getName: 'GET_NAME',
-                getEmail: 'GET_EMAIL',
-                getPassword: 'GET_PASSWORD',
-                getAgreement: 'GET_AGREEMENT'
-            })
-        },
+        data: () => ({
+            formData: {
+                name: null,
+                email: null,
+                password: null,
+                password_confirmation: null,
+                agreement: null
+            },
+            errors: {}
+        }),
         methods: {
-            ...mapActions('AUTH_MODULE', {
-                setName: 'SET_NAME',
-                setEmail: 'SET_EMAIL',
-                setPassword: 'SET_PASSWORD',
-                setAgreement: 'SET_AGREEMENT'
-            })
-        },
-        mounted() {
-            console.warn('register');
+            register() {
+                axios.post('/auth/registration',
+                    this.formData
+                ).then((response) => {
+                    console.log(response);
+                }).catch((error) => {
+                    if (Number(error.response.status) === 422) {
+                        for (let fieldName in error.response.data) {
+                            if (error.response.data.hasOwnProperty(fieldName)) {
+                                let errorText = (error.response.data[fieldName] || []).join('. ');
+                                this.$set(this.errors, fieldName, errorText);
+                            }
+                        }
+                    }
+                });
+            }
         }
     }
 </script>

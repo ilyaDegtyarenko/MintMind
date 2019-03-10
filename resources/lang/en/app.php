@@ -18,5 +18,6 @@ return [
     'faq' => 'FAQ',
     'charity' => 'Charity',
     'contacts' => 'Contacts',
-    'privacy_policy' => 'Privacy policy'
+    'privacy_policy' => 'Privacy policy',
+    'accept' => 'Accept'
 ];

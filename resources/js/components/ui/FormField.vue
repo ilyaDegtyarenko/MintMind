@@ -8,10 +8,12 @@
                   rows="5"></textarea>
 
         <input v-else
+               :type="type"
                :class="{'with-error': errorMessage}"
                :name="name"
                :disabled="disabled"
-               placeholder=" ">
+               placeholder=" "
+               @input="$emit('input', $event.target.value)">
 
         <span v-text="label"></span>
 
@@ -34,6 +36,10 @@
             label: {
                 type: String,
                 required: true
+            },
+            type: {
+                type: String,
+                default: 'text'
             },
             disabled: {
                 type: Boolean,

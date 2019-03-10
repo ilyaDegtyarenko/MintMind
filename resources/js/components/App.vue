@@ -1,25 +1,20 @@
 <template>
     <div id="wrapper">
-        <transition appear appear-active-class="header-appear">
+        <transition name="header" appear>
             <app-header></app-header>
         </transition>
 
         <app-sidebar></app-sidebar>
 
         <main>
-            <transition mode="out-in"
-                        appear
-                        appear-active-class="content-container-enter"
-                        enter-active-class="content-container-enter"
-                        leave-active-class="content-container-leave">
-
+            <transition mode="out-in" name="content" appear>
                 <keep-alive>
                     <router-view></router-view>
                 </keep-alive>
             </transition>
         </main>
 
-        <transition appear appear-active-class="footer-appear">
+        <transition name="footer" appear>
             <app-footer></app-footer>
         </transition>
     </div>
@@ -128,61 +123,29 @@
     * Animations.
     */
 
-    /* Content container. */
-    .content-container-enter {
-        @include animation(content-container-enter 250ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both);
+    .content-enter-active, .content-leave-active {
+        transition: opacity 250ms cubic-bezier(0.390, 0.575, 0.565, 1.000);
     }
 
-    @include keyframes(content-container-enter) {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
+    .content-enter, .content-leave-to {
+        opacity: 0;
     }
 
-    .content-container-leave {
-        @include animation(content-container-leave 150ms ease-out both);
+    .header-enter-active, .header-leave-active {
+        transition: opacity 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940), transform 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
     }
 
-    @include keyframes(content-container-leave) {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
+    .header-enter, .header-leave-to {
+        opacity: 0;
+        @include transform(translateY(-1000px));
     }
 
-    /* Header. */
-    .header-appear {
-        @include animation(header-appear 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both);
+    .footer-enter-active, .footer-leave-active {
+        transition: opacity 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940), transform 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
     }
 
-    @include keyframes(header-appear) {
-        0% {
-            opacity: 0;
-            @include transform(translateY(-1000px));
-        }
-        100% {
-            opacity: 1;
-            @include transform(translateY(0));
-        }
-    }
-
-    .footer-appear {
-        @include animation(footer-appear 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both);
-    }
-
-    @include keyframes(footer-appear) {
-        0% {
-            opacity: 0;
-            @include transform(translateY(1000px));
-        }
-        100% {
-            opacity: 1;
-            @include transform(translateY(0));
-        }
+    .footer-enter, .footer-leave-to {
+        opacity: 0;
+        @include transform(translateY(1000px));
     }
 </style>

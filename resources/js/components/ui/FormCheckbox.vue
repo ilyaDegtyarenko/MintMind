@@ -2,7 +2,8 @@
     <label class="mm-checkbox">
         <input type="checkbox"
                :name="name"
-               :disabled="disabled">
+               :disabled="disabled"
+               @change="$emit('change', $event.target.checked)">
 
         <span v-text="label"
               :class="{'with-error': errorMessage}"></span>

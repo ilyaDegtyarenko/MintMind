@@ -27,7 +27,8 @@ class Registration extends RequestAbstract
         return [
             'name' => 'required|min:2|max:240|regex:/^([a-zA-Zа-яА-Я]+)([0-9 ._]*)$/u',
             'email' => 'required|email|unique:users|max:240',
-            'password' => 'required|confirmed|min:8|max:240|regex:/^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[#$^+=!*()@%&]).{8,240}$/u',
+            'password' => 'required|min:8|max:240|regex:/^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[#$^+=!*()@%&]).{8,240}$/u',
+            'password_confirmation'=>'same:password',
             'agreement' => 'accepted'
         ];
     }
@@ -79,7 +80,7 @@ class Registration extends RequestAbstract
                 'condition' => trans('validation.more_than'),
                 'count' => 240
             ]),
-            'password.confirmed' => trans_choice('validation.confirmed', 'singular-masculine', [
+            'password_confirmation.same' => trans_choice('validation.confirmed', 'singular-masculine', [
                 'attribute' => mb_strtolower(trans_choice('attributes.password', 'singular'))
             ]),
             'password.regex' => trans('validation.password_regex'),

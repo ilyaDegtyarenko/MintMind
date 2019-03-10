@@ -11,15 +11,15 @@
 |
 */
 
+/*Index route.*/
+$app->get('{any:.*}', 'IndexController@index');
+
 /*Auth routes.*/
 $app->group(['prefix' => 'auth'], function () use ($app) {
     $app->post('registration', ['middleware' => 'guest', 'uses' => 'AuthController@register']);
     $app->post('login', ['middleware' => 'guest', 'uses' => 'AuthController@login']);
     $app->post('logout', ['middleware' => 'auth', 'uses' => 'AuthController@logout']);
 });
-
-/*Index route.*/
-$app->get('{any:.*}', 'IndexController@index');
 
 /*Routes for authorized users.*/
 $app->group(['middleware' => ['auth', 'csrf']], function () use ($app) {
