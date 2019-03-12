@@ -31,7 +31,9 @@
         }
     </style>
 
-    <script>window.translate = JSON.parse('{!! json_encode(__('app'), JSON_UNESCAPED_UNICODE) !!}');</script>
+    <script>
+        window.translate = Object.freeze(JSON.parse('{!! json_encode(__('app'), JSON_UNESCAPED_UNICODE) !!}'));
+    </script>
 </head>
 <body>
     <div id="app">

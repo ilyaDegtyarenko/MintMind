@@ -17,11 +17,13 @@
 
         <span v-text="label"></span>
 
-        <small v-if="errorMessage"
-               id="field-error-message"
-               style="color: var(--error-color);">
-            * {{errorMessage}}
-        </small>
+        <transition mode="out-in" name="fade" appear>
+            <small v-if="errorMessage"
+                   id="field-error-message"
+                   style="color: var(--error-color);">
+                * {{errorMessage}}
+            </small>
+        </transition>
     </label>
 </template>
 

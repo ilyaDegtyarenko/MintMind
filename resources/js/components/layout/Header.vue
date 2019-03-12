@@ -17,8 +17,19 @@
         </div>
 
         <div v-else id="auth-link">
-            <button v-if="$route.name === 'login'" class="mm-text-btn mm-btn-medium mm-text-btn-dark" @click="$router.push({name: 'registration'})" v-text="$translate.registration"></button>
-            <button v-else class="mm-text-btn mm-btn-medium mm-text-btn-dark" @click="$router.push({name: 'login'})" v-text="$translate.login"></button>
+            <transition mode="out-in" name="fade" appear>
+                <button v-if="$route.name === 'login'"
+                        class="mm-text-btn mm-btn-medium mm-text-btn-dark"
+                        key="registration"
+                        v-text="$translate.registration"
+                        @click="$router.push({name: 'registration'})"></button>
+
+                <button v-else
+                        class="mm-text-btn mm-btn-medium mm-text-btn-dark"
+                        v-text="$translate.login"
+                        @click="$router.push({name: 'login'})"
+                        key="login"></button>
+            </transition>
         </div>
 
         <!--<div style="padding: 1rem;">ТЕКЕСТ ОПРОСА</div>-->

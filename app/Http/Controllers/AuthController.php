@@ -42,13 +42,13 @@ class AuthController extends Controller
 
         if (!$user) {
             return response()->json([
-                'error' => trans('messages.errors.unknown_email')
+                'email' => [trans('messages.errors.unknown_email')]
             ], 422);
         }
 
         if (!Hash::check($request->input('password'), $user->password)) {
             return response()->json([
-                'error' => trans('messages.errors.wrong_password')
+                'password' => [trans('messages.errors.wrong_password')]
             ], 422);
         } else {
             return $this->respondWithAuthToken($user, (int)$request->input('remember'), 200);
@@ -77,7 +77,7 @@ class AuthController extends Controller
      */
     private function respondWithAuthToken(User $user, int $remember, int $code)
     {
-        $expirationTime = (1440 * ((bool)$remember ? 30 : 1)); /*Day or month.*/
+        $expirationTime = (1440 * ((bool)$remember ? 30 : 1)); /*1 day or 30 days.*/
         $payload = [
             'issuer' => 'lumen-jwt',
             'user_id' => $user->id,

@@ -1,20 +1,20 @@
 <template>
     <div id="wrapper">
-        <transition name="header" appear>
+        <transition name="slide-bottom" appear>
             <app-header></app-header>
         </transition>
 
         <app-sidebar></app-sidebar>
 
         <main>
-            <transition mode="out-in" name="content" appear>
+            <transition mode="out-in" name="fade" appear>
                 <keep-alive>
                     <router-view></router-view>
                 </keep-alive>
             </transition>
         </main>
 
-        <transition name="footer" appear>
+        <transition name="slide-top" appear>
             <app-footer></app-footer>
         </transition>
     </div>
@@ -32,27 +32,39 @@
             'app-sidebar': Sidebar,
             'app-footer': Footer
         },
-        data: () => ({}),
+        methods: {
+            disableHoverEffectsWhenScrolling() {
+                let body = document.body,
+                    timer;
+
+                window.addEventListener('scroll', () => {
+                    clearTimeout(timer);
+                    if (!body.classList.contains('disable-hover')) {
+                        body.classList.add('disable-hover');
+                    }
+
+                    timer = setTimeout(() => {
+                        body.classList.remove('disable-hover');
+                    }, 500);
+                }, false);
+            }
+        },
         mounted() {
-            let body = document.body,
-                timer;
+            this.disableHoverEffectsWhenScrolling();
 
-            window.addEventListener('scroll', () => {
-                clearTimeout(timer);
-                if (!body.classList.contains('disable-hover')) {
-                    body.classList.add('disable-hover');
-                }
+            this.$nextTick(() => this.$store.dispatch('MAIN/SWITCH_INTERACTION', true));
 
-                timer = setTimeout(() => {
-                    body.classList.remove('disable-hover');
-                }, 500);
-            }, false);
+            this.$store.dispatch('LOCAL_STORAGE/SET_STORAGE_DATA', {key: 'someKey', value:[123]}).catch((error) => console.error(error));
+            console.warn(this.$store.getters['LOCAL_STORAGE/GET_STORAGE_DATA']('someKey'));
+
+            console.log('%c Mounted', 'color: green;');
         }
     }
 </script>
 
 <style lang="scss">
     @import '@scss/variables';
+    @import '@scss/mixins';
     @import '@scss/form-elements';
 
     *, *::before, *::after {
@@ -85,21 +97,12 @@
     }
 
     body::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, .2);
-        -moz-box-shadow: inset 2px 2px 5px rgba(0, 0, 0, .2);
-        box-shadow: inset 2px 2px 5px rgba(0, 0, 0, .2);
+        @include box-shadow(inset 2px 2px 5px rgba(0, 0, 0, .2));
     }
 
     body::-webkit-scrollbar-thumb {
         background-color: #504f50;
         border: 1px solid var(--dark-color);
-    }
-
-    main {
-        align-items: center;
-        justify-content: center;
-        flex: 1 0 auto;
-        margin: 65px 5px 5px 5px;
     }
 
     ul, ol {
@@ -109,43 +112,55 @@
     .disable-hover {
         pointer-events: none;
     }
-</style>
 
-<style lang="scss" scoped>
-    @import '@scss/mixins';
-
-    main {
-        display: flex;
-        flex-flow: column wrap;
+    .disabled-button {
+        opacity: .8;
+        pointer-events: none;
+        cursor: initial;
+        color: var(--disabled-color);
     }
 
     /*
     * Animations.
     */
 
-    .content-enter-active, .content-leave-active {
-        transition: opacity 250ms cubic-bezier(0.390, 0.575, 0.565, 1.000);
+    // Fade.
+    .fade-enter-active, .fade-leave-active {
+        @include transition(opacity 250ms cubic-bezier(0.390, 0.575, 0.565, 1.000));
     }
 
-    .content-enter, .content-leave-to {
+    .fade-enter, .fade-leave-to {
         opacity: 0;
     }
 
-    .header-enter-active, .header-leave-active {
-        transition: opacity 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940), transform 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    // Slide bottom.
+    .slide-bottom-enter-active, .slide-bottom-leave-active {
+        @include transition(opacity 450ms cubic-bezier(0.250, 0.460, 0.450, 0.940), transform 400ms cubic-bezier(0.250, 0.460, 0.450, 0.940));
     }
 
-    .header-enter, .header-leave-to {
+    .slide-bottom-enter, .slide-bottom-leave-to {
         opacity: 0;
         @include transform(translateY(-1000px));
     }
 
-    .footer-enter-active, .footer-leave-active {
-        transition: opacity 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940), transform 275ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    // Slide top.
+    .slide-top-enter-active, .slide-top-leave-active {
+        @include transition(opacity 450ms cubic-bezier(0.250, 0.460, 0.450, 0.940), transform 400ms cubic-bezier(0.250, 0.460, 0.450, 0.940));
     }
 
-    .footer-enter, .footer-leave-to {
+    .slide-top-enter, .slide-top-leave-to {
         opacity: 0;
         @include transform(translateY(1000px));
+    }
+</style>
+
+<style lang="scss" scoped>
+    main {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        flex: 1 0 auto;
+        margin: 65px 5px 5px 5px;
     }
 </style>

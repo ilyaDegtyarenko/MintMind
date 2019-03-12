@@ -129,12 +129,12 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
   color: var(--dark-color);
 
   &:hover {
-    background: rgba(0, 0, 0, .1);
+    background: rgba(0, 0, 0, .05);
   }
 }
 
 .mm-text-btn-dark {
-  background: transparent;
+  background: var(--dark-color);
   color: var(--light-color);
 
   &:hover {
