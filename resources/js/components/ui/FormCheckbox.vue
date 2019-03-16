@@ -8,7 +8,7 @@
         <span v-text="label"
               :class="{'with-error': errorMessage}"></span>
 
-        <small v-if="errorMessage"
+        <small v-if="!hideErrorMessage && errorMessage"
                id="field-error-message"
                style="color: var(--error-color);">
             * {{errorMessage}}
@@ -29,6 +29,10 @@
                 required: true
             },
             disabled: {
+                type: Boolean,
+                default: false
+            },
+            hideErrorMessage: {
                 type: Boolean,
                 default: false
             },

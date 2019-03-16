@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <img src="images/footer.png" width="65" alt="Dark site logo for footer.">
+        <img src="images/footer-logo.png" width="75" alt="Dark site logo for footer.">
 
         <ul>
             <li v-text="$translate.feedback"></li>
@@ -10,8 +10,8 @@
 
         <ul>
             <li v-text="$translate.contacts"></li>
-            <li v-text="$translate.agreement"></li>
-            <li v-text="$translate.privacy_policy"></li>
+            <li v-text="$translate.agreement" @click="$router.push({name: 'agreement'})"></li>
+            <li v-text="$translate.privacy_policy" @click="$router.push({name: 'policy'})"></li>
         </ul>
     </footer>
 </template>

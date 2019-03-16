@@ -2,7 +2,8 @@
     <app-form link-style="justify-content: flex-end; margin-right: -1rem;">
         <template v-slot:link>
             <button type="button"
-                    class="mm-text-btn mm-btn-small mm-text-btn-light"
+                    class="mm-text-btn mm-btn-small mm-text-btn-light redirect-link"
+                    v-ripple-effect
                     @click="$router.push({name: 'registration'})">
                 <span v-text="$translate.registration"></span> <i class="material-icons">keyboard_arrow_right</i>
             </button>
@@ -34,8 +35,10 @@
         </div>
 
         <button type="button"
-                class="mm-btn mm-btn-medium mm-btn-dark"
+                :class="['mm-btn mm-btn-medium mm-btn-dark', {'disabled-button': isLoginButtonDisabled()}]"
+                v-ripple-effect
                 v-text="$translate.login"
+                :disabled="isLoginButtonDisabled()"
                 @click="login()"></button>
     </app-form>
 </template>
@@ -85,7 +88,16 @@
                         this.errors = errors;
                     }
                 });
+            },
+            isLoginButtonDisabled() {
+                return Boolean(Object.values(this.errors).find(field => (field !== null)));
             }
         }
     }
 </script>
+
+<style scoped>
+    .redirect-link {
+        border-left: 2px solid !important;
+    }
+</style>

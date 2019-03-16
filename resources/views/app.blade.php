@@ -33,6 +33,7 @@
 
     <script>
         window.translate = Object.freeze(JSON.parse('{!! json_encode(__('app'), JSON_UNESCAPED_UNICODE) !!}'));
+        window.locale = '{{ locale() }}';
     </script>
 </head>
 <body>

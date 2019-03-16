@@ -54,7 +54,10 @@
 
             this.$nextTick(() => this.$store.dispatch('MAIN/SWITCH_INTERACTION', true));
 
-            this.$store.dispatch('LOCAL_STORAGE/SET_STORAGE_DATA', {key: 'someKey', value:[123]}).catch((error) => console.error(error));
+            this.$store.dispatch('LOCAL_STORAGE/SET_STORAGE_DATA', {
+                key: 'someKey',
+                value: [123]
+            }).catch((error) => console.error(error));
             console.warn(this.$store.getters['LOCAL_STORAGE/GET_STORAGE_DATA']('someKey'));
 
             console.log('%c Mounted', 'color: green;');
@@ -107,6 +110,25 @@
 
     ul, ol {
         list-style-type: none;
+    }
+
+    a {
+        color: inherit;
+        font-size: .85rem;
+        border-bottom: 1px dashed transparent;
+
+        &:hover:not(:active) {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%2347ca8c' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+            background-position: 0 100%;
+            background-size: auto .14rem;
+            background-repeat: repeat-x;
+            text-decoration: none;
+        }
+
+        &:active {
+            border-bottom-color: #47ca8c;
+            text-decoration: none;
+        }
     }
 
     .disable-hover {

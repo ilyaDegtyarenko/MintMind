@@ -4,12 +4,14 @@ import VueRouter from 'vue-router'
 import {setPageTitle, routeMiddleware} from './util';
 import {auth as Auth, guest as Guest, test} from './middleware';
 
-import Index from '../components/auth/Index';
+import Index from '@components/auth/Index';
 import Login from '@components/auth/Login';
 import Register from '@components/auth/Register';
 import SurveyList from '@components/content/SurveyList';
 import CurrentSurvey from '@components/content/CurrentSurvey';
 import PageNotFound from '@components/errors/PageNotFound';
+import Agreement from '@components/content/Agreement';
+import Policy from '@components/content/Policy';
 
 Vue.use(VueRouter);
 
@@ -55,6 +57,22 @@ const router = new VueRouter({
             meta: {
                 title: window.translate.survey,
                 middleware: Auth
+            }
+        },
+        {
+            path: '/agreement',
+            name: 'agreement',
+            component: Agreement,
+            meta: {
+                title: window.translate.agreement
+            }
+        },
+        {
+            path: '/privacy-policy',
+            name: 'policy',
+            component: Policy,
+            meta: {
+                title: window.translate.privacy_policy
             }
         },
         {

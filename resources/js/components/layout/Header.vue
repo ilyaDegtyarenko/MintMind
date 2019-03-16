@@ -1,8 +1,7 @@
 <template>
     <header ref="header">
-
         <div id="logo" @click="$router.go()">
-            <img src="images/header.png" width="45" alt="Light site logo for header."> {{$translate.app_name}}
+            <img src="images/header-logo.png" width="45" alt="Light site logo for header."> {{$translate.app_name}}
         </div>
 
         <div v-if="testAuth"
@@ -21,11 +20,13 @@
                 <button v-if="$route.name === 'login'"
                         class="mm-text-btn mm-btn-medium mm-text-btn-dark"
                         key="registration"
+                        v-ripple-effect
                         v-text="$translate.registration"
                         @click="$router.push({name: 'registration'})"></button>
 
                 <button v-else
                         class="mm-text-btn mm-btn-medium mm-text-btn-dark"
+                        v-ripple-effect
                         v-text="$translate.login"
                         @click="$router.push({name: 'login'})"
                         key="login"></button>
