@@ -28,7 +28,7 @@ const router = new VueRouter({
             name: 'registration',
             component: Register,
             meta: {
-                title: window.translate.registration,
+                title: translate.registration,
                 middleware: Guest /* Or multiple "[One, ...]". */
             }
         },
@@ -37,7 +37,7 @@ const router = new VueRouter({
             name: 'login',
             component: Login,
             meta: {
-                title: window.translate.login,
+                title: translate.login,
                 middleware: Guest
             }
         },
@@ -46,7 +46,7 @@ const router = new VueRouter({
             name: 'survey-list',
             component: SurveyList,
             meta: {
-                title: window.translate.survey_list,
+                title: translate.survey_list,
                 middleware: Auth
             }
         },
@@ -55,7 +55,7 @@ const router = new VueRouter({
             name: 'survey',
             component: CurrentSurvey,
             meta: {
-                title: window.translate.survey,
+                title: translate.survey,
                 middleware: Auth
             }
         },
@@ -64,7 +64,7 @@ const router = new VueRouter({
             name: 'agreement',
             component: Agreement,
             meta: {
-                title: window.translate.agreement
+                title: translate.agreement
             }
         },
         {
@@ -72,14 +72,14 @@ const router = new VueRouter({
             name: 'policy',
             component: Policy,
             meta: {
-                title: window.translate.privacy_policy
+                title: translate.privacy_policy
             }
         },
         {
             path: '/*',
             component: PageNotFound,
             meta: {
-                title: window.translate.page_not_found
+                title: translate.page_not_found
             }
         }
     ]

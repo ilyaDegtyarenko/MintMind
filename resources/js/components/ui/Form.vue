@@ -9,6 +9,20 @@
         </div>
 
         <slot></slot>
+
+        <div id="hint">
+            <span v-if="$locale === 'ru'">
+                Приложение защищено с помощью reCAPTCHA, применяется
+                <a href="https://policies.google.com/privacy">Политика конфиденциальности</a>
+                и <a href="https://policies.google.com/terms">Условия обслуживания</a> Google.
+            </span>
+
+            <span v-else>
+                This site is protected by reCAPTCHA and the Google
+                <a href="https://policies.google.com/privacy">Privacy Policy</a>
+                and <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+            </span>
+        </div>
     </form>
 </template>
 
@@ -31,7 +45,7 @@
         display: flex;
         flex-flow: column wrap;
         min-width: 30%;
-        max-width: 800px;
+        max-width: 600px;
         padding: 1rem 2rem;
         @include box-shadow(0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12));
 
@@ -59,6 +73,16 @@
             margin: .5rem;
             font-size: 2rem;
             text-align: center;
+        }
+
+        #hint {
+            font-size: .75rem;
+            text-align: center;
+            color: #bdbdbd;
+
+            a {
+                font-size: .75rem;
+            }
         }
     }
 </style>

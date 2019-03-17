@@ -28,7 +28,7 @@
         align-items: center;
         justify-content: space-around;
         flex-shrink: 0;
-        padding: 5%;
+        padding: 4rem;
         font-size: .9rem;
         background: var(--dark-color);
         -webkit-user-select: none;

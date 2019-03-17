@@ -91,33 +91,63 @@
             errors: {}
         }),
         methods: {
-            register() {
-                console.log(Object.values(this.errors));
-                if (Object.values(this.errors).find(value => !!value)) {
-                    alert('Fix errors.');
-                    return;
-                }
-
-                axios.post('/auth/registration',
-                    this.formData
-                ).then((response) => {
-                    console.log(response);
-                }).catch((error) => {
-                    if (Number(error.response.status) === 422) {
-                        let errors = {};
-
-                        for (let fieldName in error.response.data) {
-                            if (error.response.data.hasOwnProperty(fieldName)) {
-                                errors[fieldName] = (error.response.data[fieldName] || []).join('. ');
-                            }
-                        }
-
-                        this.errors = errors;
-                    }
+            switchInteraction(boolean) {
+                this.$store.dispatch('MAIN/SWITCH_INTERACTION', boolean).catch(error => {
+                    alert(this.$translate.app_error);
+                    throw new Error(error);
                 });
             },
+            register() {
+                if (Object.values(this.errors).find(value => !!value)) return false;
+
+                this.switchInteraction(false);
+
+                this.$recaptcha('registration').then((token) => {
+                    axios.post('/re-captcha/verify', {
+                        token
+                    }).then(() => {
+                        makeRegistration();
+                    }).catch(error => {
+                        if (error.response.data.hasOwnProperty('error')) {
+                            alert(error.response.data.error);
+                        } else {
+                            alert(this.$translate.app_error);
+                        }
+                        throw new Error(error);
+                    });
+                }).catch(error => {
+                    alert(this.$translate.app_error);
+                    throw new Error(error);
+                });
+
+                let makeRegistration = () => {
+                    axios.post('/auth/registration',
+                        this.formData
+                    ).then(response => {
+                        console.log(response);
+
+                        this.switchInteraction(true);
+                    }).catch(error => {
+                        if (Number(error.response.status) === 422) {
+                            let errors = {};
+                            for (let fieldName in error.response.data) {
+                                if (error.response.data.hasOwnProperty(fieldName)) {
+                                    errors[fieldName] = (error.response.data[fieldName] || []).join('. ');
+                                }
+                            }
+
+                            this.switchInteraction(true);
+                            this.$nextTick(() => this.errors = errors);
+                        } else if (error.response.data.hasOwnProperty('error')) {
+                            alert(error.response.data.error);
+                        } else {
+                            alert(this.$translate.app_error);
+                        }
+                    });
+                };
+            },
             isRegistrationButtonDisabled() {
-                return Boolean(Object.values(this.errors).find(field => (field !== null)));
+                return !this.$store.getters['MAIN/IS_INTERACTION_ENABLED'] || Boolean(Object.values(this.errors).find(field => (field !== null)));
             }
         },
         mounted() {

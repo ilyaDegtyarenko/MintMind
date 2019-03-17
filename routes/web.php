@@ -11,17 +11,20 @@
 |
 */
 
-/*Index route.*/
+/* Index route. */
 $app->get('{any:.*}', 'IndexController@index');
 
-/*Auth routes.*/
+/* Auth routes. */
 $app->group(['prefix' => 'auth'], function () use ($app) {
     $app->post('registration', ['middleware' => 'guest', 'uses' => 'AuthController@register']);
     $app->post('login', ['middleware' => 'guest', 'uses' => 'AuthController@login']);
     $app->post('logout', ['middleware' => 'auth', 'uses' => 'AuthController@logout']);
 });
 
-/*Routes for authorized users.*/
+/* Google reCaptcha. */
+$app->post('re-captcha/verify', 'GoogleReCaptcha@verify');
+
+/* Routes for authorized users. */
 $app->group(['middleware' => ['auth', 'csrf']], function () use ($app) {
 
 });

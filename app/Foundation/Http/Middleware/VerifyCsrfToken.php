@@ -44,15 +44,21 @@ class VerifyCsrfToken
         if ($this->isWriting($request) && !$this->isExceptedUri($request)) {
             $encryptedAppKey = $request->header('x-csrf-token');
             $encryptedUserToken = $request->input('xsrf_token');
-            
+
             if (!$this->userPersonalToken
                 || !$encryptedAppKey
                 || !$encryptedUserToken
                 || !$this->tokenComparison($encryptedAppKey, $encryptedUserToken)) {
 
                 $this->regenerateUserPersonalTokenAndLogout();
+                report([
+                    'error' => 'CSRF token not found or does\'t match.',
+                    'encrypted_app_key' => $encryptedAppKey,
+                    'encrypted_user_token' => $encryptedUserToken,
+                    'credentials' => $request->credentials ?? null
+                ]);
 
-                return response()->json('CSRF token not found or does\'t match.', 403);
+                return response()->json(['error' => trans('messages.errors.forbidden')], 403);
             }
         }
 
@@ -79,7 +85,6 @@ class VerifyCsrfToken
     private function regenerateUserPersonalTokenAndLogout(): bool
     {
         $user = Auth::user();
-
         $user->update(['personal_token' => generate_hash()]);
 
         AuthController::logout();

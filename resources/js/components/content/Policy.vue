@@ -1,6 +1,6 @@
 <template>
     <div id="policy-wrapper">
-        <div v-if="locale === 'ru'">
+        <div v-if="$locale === 'ru'">
             <h1>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ И ЗАЩИТЫ ПЕРСОНАЛЬНЫХ ДАННЫХ</h1>
 
             <h2>ОБЩЕЕ ПОЛОЖЕНИЕ</h2>
@@ -115,12 +115,7 @@
 
 <script>
     export default {
-        name: 'Policy',
-        computed: {
-            locale() {
-                return window.locale;
-            }
-        }
+        name: 'Policy'
     }
 </script>
 

@@ -299,7 +299,7 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
       }
 
       &:not(.with-error) + span {
-        color: #c7c7c7;
+        font-size: .8rem;
       }
     }
 

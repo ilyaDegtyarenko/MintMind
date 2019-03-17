@@ -5128,6 +5128,11 @@ readdirp@^2.2.1:
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
 
+recaptcha-v3@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/recaptcha-v3/-/recaptcha-v3-1.4.0.tgz#82735b1b4accea1c5bb5a8c46f410e15f10afc0d"
+  integrity sha512-OWOaFq2p0UMG2PUcnPBjlRK86kDmS8EhnFOhbKWJg/+hQdQnLR6Soz/AgbfWii+a2DlOslSw8pyuz0gD3ITM5A==
+
 recast@~0.11.12:
   version "0.11.23"
   resolved "https://registry.yarnpkg.com/recast/-/recast-0.11.23.tgz#451fd3004ab1e4df9b4e4b66376b2a21912462d3"
@@ -6221,6 +6226,13 @@ vue-online@^1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/vue-online/-/vue-online-1.1.9.tgz#0a3b0992881e47c3574f0ca3a7f99901ed109281"
   integrity sha1-CjsJkogeR8NXTwyjp/mZAe0QkoE=
+
+vue-recaptcha-v3@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/vue-recaptcha-v3/-/vue-recaptcha-v3-1.4.0.tgz#aa1b0cfc2242c74839e774003054c7810d9b09a6"
+  integrity sha512-6Z2fJONpI3ktoybVu8B9vz3aocpZhan/mwcw2aIRZ86VmEqJK3F7Yp3mP4XISJ/KnAFTbqMnsDqtb/RriB478A==
+  dependencies:
+    recaptcha-v3 "^1.4.0"
 
 vue-ripple-directive@^2.0.1:
   version "2.0.1"

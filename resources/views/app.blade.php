@@ -25,15 +25,21 @@
             width: 40%;
             padding: 20px;
             font-size: 1.2rem;
+            text-align: center;
             -webkit-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
             -moz-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
             box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
         }
     </style>
 
-    <script>
-        window.translate = Object.freeze(JSON.parse('{!! json_encode(__('app'), JSON_UNESCAPED_UNICODE) !!}'));
-        window.locale = '{{ locale() }}';
+    <script src="https://www.google.com/recaptcha/api.js?render={{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></script>
+
+    <script type="text/javascript">
+
+        /* Used in "app.js". */
+        const googleReCaptchaSiteKey = '{{env('GOOGLE_RECAPTCHA_SITE_KEY')}}',
+            translate = Object.freeze(JSON.parse('{!! json_encode(__('app'), JSON_UNESCAPED_UNICODE) !!}')),
+            locale = '{{ locale() }}';
     </script>
 </head>
 <body>
@@ -42,9 +48,7 @@
 
         <noscript>
             <span>
-                For full functionality of this site it is necessary to enable JavaScript.
-                Here are the instructions
-                <a href="https://www.enable-javascript.com/">how to enable JavaScript in your web browser</a>.
+                {!! trans('messages.errors.noscript') !!}
             </span>
         </noscript>
     </div>

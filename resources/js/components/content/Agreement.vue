@@ -1,6 +1,6 @@
 <template>
     <div id="agreement-wrapper" :class="agreementWrapperClass">
-        <div v-if="locale === 'ru'">
+        <div v-if="$locale === 'ru'">
             <h1>ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</h1>
 
             <p>
@@ -204,9 +204,6 @@
         computed: {
             agreementWrapperClass() {
                 return (this.embed ? '--embed' : '--page');
-            },
-            locale() {
-                return window.locale;
             }
         }
     }

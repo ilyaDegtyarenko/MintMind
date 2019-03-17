@@ -39,32 +39,30 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response()->json('Unauthorized.', 401);
+        if ($this->auth->guard($guard)->guest()) { /* Unauthorized. */
+            return response()->json(['error' => trans('messages.errors.authorization_required')], 401);
         }
 
         $authToken = $request->header('x-auth-token');
 
-        if (!$authToken || !$this->tokenComparison($authToken)) {
+        if (!$authToken || !$this->tokenComparison($authToken)) { /* Auth token not found or does't match. */
             AuthController::logout();
 
-            return response()->json('Auth token not found or does\'t match.', 401);
+            return response()->json(['error' => trans('messages.errors.authorization_required')], 401);
         }
 
         try {
             JWT::decode($authToken, env('JWT_SECRET'), [env('JWT_ALGORITHM')]);
-        } catch (ExpiredException $e) {
+        } catch (ExpiredException $e) { /* Provided auth token is expired. */
             AuthController::logout();
 
-            return response()->json('Provided auth token is expired.', 419);
-        } catch (\Exception $e) {
+            return response()->json(['error' => trans('messages.errors.authorization_required')], 419);
+        } catch (\Exception $e) { /* An error while decoding token. */
             AuthController::logout();
 
-            $message = 'An error while decoding token.';
+            report('An error while decoding token.', $e->getMessage());
 
-            report($message, $e->getMessage());
-
-            return response()->json($message, 401);
+            return response()->json(['error' => trans('messages.errors.authorization_required')], 401);
         }
 
         return $next($request);
