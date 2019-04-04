@@ -1,22 +1,14 @@
 require('./bootstrap');
-
-import 'es6-promise/auto';
-import store from './store/index';
-import router from './routes/index';
-import {VueOnline} from 'vue-online';
-import {VueReCaptcha} from 'vue-recaptcha-v3';
-import Ripple from 'vue-ripple-directive';
-
-Ripple.color = 'rgba(69, 231, 164, .5)';
-Vue.directive('ripple-effect', Ripple);
-Vue.use(VueReCaptcha, {siteKey: googleReCaptchaSiteKey});
-
-Vue.prototype.$bus = new Vue();
-Vue.prototype.$internetConnection = VueOnline;
-Vue.prototype.$translate = translate;
-Vue.prototype.$locale = locale;
+require('./prototypes'); /* Global prototypes. */
+require('./directives'); /* Global directives. */
 
 Vue.component('app', require('./components/App').default);
+
+/* Vuex - store. */
+import store from './store/index';
+
+/* VueRouter - routes. */
+import router from './routes/index';
 
 /* App. */
 new Vue({
