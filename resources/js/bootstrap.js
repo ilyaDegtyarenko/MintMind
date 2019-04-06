@@ -11,3 +11,18 @@ if (token) {
 } else {
     console.error('CSRF token not found.');
 }
+
+/* Promise for old browsers. */
+import 'es6-promise/auto';
+
+/* Google recaptcha. */
+import {VueReCaptcha} from 'vue-recaptcha-v3';
+
+Vue.use(VueReCaptcha, {siteKey: googleReCaptchaSiteKey});
+
+/* Ripple effect, */
+import Ripple from '@js/ripple';
+
+Ripple.activeMouseButtons = [1];
+Ripple.zIndex = -1;
+Vue.directive('ripple-effect', Ripple);

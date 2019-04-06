@@ -15,6 +15,11 @@ let mix = require('laravel-mix'),
 
 mix
 .js('resources/js/app.js', 'public/js/app.js')
+.options({
+    postCss: [
+        require('autoprefixer'),
+    ],
+})
 .webpackConfig({
     resolve: {
         extensions: ['.js', '.scss', '.vue'],
