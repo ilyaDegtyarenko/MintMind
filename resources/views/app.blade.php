@@ -9,28 +9,8 @@
     <title></title>
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat&amp;subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-        noscript {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            margin-top: 15px;
-        }
-
-        noscript > span {
-            display: block;
-            width: 40%;
-            padding: 20px;
-            font-size: 1.2rem;
-            text-align: center;
-            -webkit-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
-            -moz-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
-            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
-        }
-    </style>
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
     <script src="https://www.google.com/recaptcha/api.js?render={{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></script>
 

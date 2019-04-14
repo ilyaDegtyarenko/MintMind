@@ -15,14 +15,15 @@ let mix = require('laravel-mix'),
 
 mix
 .js('resources/js/app.js', 'public/js/app.js')
+.sass('resources/scss/app.scss', 'public/css/app.css')
 .options({
     postCss: [
-        require('autoprefixer'),
-    ],
+        require('autoprefixer')
+    ]
 })
 .webpackConfig({
     resolve: {
-        extensions: ['.js', '.scss', '.vue'],
+        extensions: ['.js', '.ccs', '.scss', '.vue'],
         alias: {
             '@js': path.resolve('./resources/js'),
             '@scss': path.resolve('./resources/scss'),
