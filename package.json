@@ -16,6 +16,7 @@
     "es6-promise": "^4.2.6",
     "laravel-mix": "^4.0.14",
     "lodash": "^4.17.11",
+    "material-design-icons": "/Users/me/Downloads/package",
     "vue": "^2.6.8",
     "vue-online": "^1.1.9",
     "vue-recaptcha-v3": "^1.4.0",

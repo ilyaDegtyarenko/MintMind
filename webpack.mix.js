@@ -17,13 +17,14 @@ mix
 .js('resources/js/app.js', 'public/js/app.js')
 .sass('resources/scss/app.scss', 'public/css/app.css')
 .options({
+    processCssUrls: true,
     postCss: [
         require('autoprefixer')
     ]
 })
 .webpackConfig({
     resolve: {
-        extensions: ['.js', '.ccs', '.scss', '.vue'],
+        extensions: ['.ccs', '.scss', '.js', '.vue'],
         alias: {
             '@js': path.resolve('./resources/js'),
             '@scss': path.resolve('./resources/scss'),
@@ -33,11 +34,17 @@ mix
     devServer: {
         hot: true,
         inline: true,
+        clientLogLevel: 'error',
+        overlay: {
+            warnings: true,
+            errors: true
+        },
         allowedHosts: [
             'mint-mind.dv'
         ]
     }
-});
+})
+.sourceMaps();
 
 if (production) {
     mix.version();

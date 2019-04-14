@@ -10,21 +10,21 @@
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat&amp;subset=cyrillic" rel="stylesheet">
 
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ \Illuminate\Support\Facades\URL::asset('css/app.css') }}">
 
-    <script src="https://www.google.com/recaptcha/api.js?render={{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ env('GOOGLE_RECAPTCHA_SITE_KEY') }}"></script>
 
     <script type="text/javascript">
 
         /* Used in "app.js". */
-        const googleReCaptchaSiteKey = '{{env('GOOGLE_RECAPTCHA_SITE_KEY')}}',
+        const googleReCaptchaSiteKey = '{{ env('GOOGLE_RECAPTCHA_SITE_KEY') }}',
             translate = Object.freeze(JSON.parse('{!! json_encode(__('app'), JSON_UNESCAPED_UNICODE) !!}')),
             locale = '{{ locale() }}';
     </script>
 </head>
 <body>
     <div id="app">
-        <app :auth-user="{{json_encode($authUser, JSON_UNESCAPED_UNICODE)}}"></app>
+        <app :auth-user="{{ json_encode($authUser, JSON_UNESCAPED_UNICODE) }}"></app>
 
         <noscript>
             <span>
