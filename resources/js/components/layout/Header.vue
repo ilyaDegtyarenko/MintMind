@@ -1,6 +1,6 @@
 <template>
     <header ref="header">
-        <div id="logo" @click="$router.go()">
+        <div id="logo" @click="$router.push({name: 'index'})">
             <img src="images/header-logo.png" width="45" alt="Light site logo for header."> {{$translate.app_name}}
         </div>
 
