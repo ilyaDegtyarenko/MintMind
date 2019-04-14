@@ -34,10 +34,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        /*FIXME render (?)*/
-        report($exception->getCode(), $exception->getMessage(), $exception->getTraceAsString());
-
         parent::report($exception);
+
+        report($exception->getCode(), $exception->getMessage(), $exception->getTraceAsString());
     }
 
     /**
