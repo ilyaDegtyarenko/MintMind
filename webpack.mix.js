@@ -24,7 +24,7 @@ mix
 })
 .webpackConfig({
     resolve: {
-        extensions: ['.ccs', '.scss', '.js', '.vue'],
+        extensions: ['.css', '.scss', '.js', '.vue'],
         alias: {
             '@js': path.resolve('./resources/js'),
             '@scss': path.resolve('./resources/scss'),
