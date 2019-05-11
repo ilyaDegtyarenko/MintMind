@@ -103,6 +103,12 @@
   background-clip: $prop;
 }
 
+@mixin appearance($prop) {
+  -webkit-appearance: $prop;
+  -moz-appearance: $prop;
+  appearance: $prop;
+}
+
 @mixin linear-gradient($attribute, $props...) {
   $available-attributes: background, background-color, color;
 

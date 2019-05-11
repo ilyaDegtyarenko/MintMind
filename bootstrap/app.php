@@ -80,7 +80,6 @@ $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 $app->register(Pearl\RequestValidate\RequestServiceProvider::class);
 
 $app->withFacades();
-
 $app->withEloquent();
 
 /*

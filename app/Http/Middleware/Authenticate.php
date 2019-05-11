@@ -59,7 +59,6 @@ class Authenticate
             return response()->json(['error' => trans('messages.errors.authorization_required')], 419);
         } catch (\Exception $e) { /* An error while decoding token. */
             AuthController::logout();
-
             report('An error while decoding token.', $e->getMessage());
 
             return response()->json(['error' => trans('messages.errors.authorization_required')], 401);
@@ -77,7 +76,6 @@ class Authenticate
     private function tokenComparison(string $token): bool
     {
         $userAuthToken = app('cache')->get('users:' . $this->auth->user()->id . ':auth_token');
-
         if (!$userAuthToken) return false;
 
         return hash_equals($userAuthToken, $token);

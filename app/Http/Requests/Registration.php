@@ -28,7 +28,7 @@ class Registration extends RequestAbstract
             'name' => 'required|min:2|max:240|regex:/^([a-zA-Zа-яА-Я]+)([0-9 ._]*)$/u',
             'email' => 'required|email|unique:users|max:240',
             'password' => 'required|min:8|max:240|regex:/^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[#$^+=!*()@%&]).{8,240}$/u',
-            'password_confirmation'=>'same:password',
+            'password_confirmation' => 'same:password',
             'agreement' => 'accepted'
         ];
     }

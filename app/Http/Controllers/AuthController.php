@@ -77,7 +77,7 @@ class AuthController extends Controller
      */
     private function respondWithAuthToken(User $user, int $remember, int $code)
     {
-        $expirationTime = (1440 * ((bool)$remember ? 30 : 1)); /*1 day or 30 days.*/
+        $expirationTime = (1440 * ($remember ? 30 : 1)); /*30 days or 1 day.*/
         $payload = [
             'issuer' => 'lumen-jwt',
             'user_id' => $user->id,

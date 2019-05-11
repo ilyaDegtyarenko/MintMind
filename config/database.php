@@ -32,13 +32,11 @@ return [
     */
 
     'connections' => [
-
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => env('DB_PREFIX', ''),
         ],
-
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -54,7 +52,6 @@ return [
             'engine' => env('DB_ENGINE', null),
             'timezone' => env('DB_TIMEZONE', '+00:00'),
         ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -67,7 +64,6 @@ return [
             'schema' => env('DB_SCHEMA', 'public'),
             'sslmode' => env('DB_SSL_MODE', 'prefer'),
         ],
-
         'mongodb' => [
             'driver' => env('DB_DRIVER'),
             'host' => env('DB_HOST'),
@@ -79,7 +75,6 @@ return [
                 'database' => env('DB_OPTION_DATABASE')
             ]
         ],
-
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST', 'localhost'),
@@ -90,7 +85,6 @@ return [
             'charset' => env('DB_CHARSET', 'utf8'),
             'prefix' => env('DB_PREFIX', ''),
         ],
-
     ],
 
     /*
@@ -118,25 +112,19 @@ return [
     */
 
     'redis' => [
-
         'client' => 'predis',
-
         'cluster' => env('REDIS_CLUSTER'),
-
         'default' => [
             'host' => env('REDIS_HOST'),
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT'),
             'database' => env('REDIS_DB'),
         ],
-
         'cache' => [
             'host' => env('REDIS_HOST'),
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT'),
             'database' => env('REDIS_CACHE_DB'),
         ],
-
     ],
-
 ];

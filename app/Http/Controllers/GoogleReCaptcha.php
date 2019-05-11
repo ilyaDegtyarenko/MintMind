@@ -47,7 +47,7 @@ class GoogleReCaptcha extends Controller
     {
         $secret = env('GOOGLE_RECAPTCHA_SECRET_KEY');
 
-        return file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$token");
+        return file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$token}");
     }
 
 }

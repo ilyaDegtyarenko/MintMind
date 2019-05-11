@@ -86,9 +86,6 @@ return [
     |
     */
 
-    'prefix' => env(
-        'CACHE_PREFIX',
-        str_slug(env('APP_NAME', 'lumen'), '_').'_cache'
-    ),
+    'prefix' => env('CACHE_PREFIX', str_slug(env('APP_NAME', 'lumen'), '_') . '_cache'),
 
 ];

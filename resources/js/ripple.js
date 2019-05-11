@@ -115,7 +115,7 @@ function init(
         activationEventTypes,
         activeMouseButtons
     };
-console.log(settings);
+
     let state = {
         isAnimationInProgress: false,
         hasInteractionEnded: false,

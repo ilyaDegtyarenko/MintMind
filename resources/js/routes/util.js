@@ -33,9 +33,8 @@ export function routeMiddleware({router, to, next}) {
  * @returns {*}
  */
 export function setPageTitle(to, next) {
-    const appName = translate.app_name || '';
-
-    let title = ((to.meta && to.meta.title) ? to.meta.title : null);
+    let appName = translate.app_name || '',
+        title = ((to.meta && to.meta.title) ? to.meta.title : null);
 
     document.title = appName + (title ? (' - ' + title) : '');
 

@@ -10,7 +10,6 @@ export default {
             }
 
             let storageData = localStorage.getItem(storageKey);
-
             try {
                 storageData = JSON.parse(storageData);
 
@@ -31,7 +30,6 @@ export default {
     mutations: {
         SET_STORAGE_DATA: (state, {getters, key, value}) => {
             let storageData = getters['GET_STORAGE_DATA']();
-
             if (!storageData) {
                 storageData = {[key]: value};
             } else {

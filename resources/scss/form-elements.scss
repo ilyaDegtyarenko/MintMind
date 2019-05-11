@@ -1,3 +1,5 @@
+@import '@scss/mixins';
+
 $inactive-border-color: #5f5f5f;
 $disabled-color: rgba(0, 0, 0, .3);
 $invalid-color: var(--error-color);
@@ -13,37 +15,20 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
   vertical-align: middle;
   will-change: transform, opacity, box-shadow;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-transition: all 250ms cubic-bezier(.4, 0, .2, 1);
-  -moz-transition: all 250ms cubic-bezier(.4, 0, .2, 1);
-  -ms-transition: all 250ms cubic-bezier(.4, 0, .2, 1);
-  -o-transition: all 250ms cubic-bezier(.4, 0, .2, 1);
-  transition: all 250ms cubic-bezier(.4, 0, .2, 1);
+  @include transition(all 250ms cubic-bezier(.4, 0, .2, 1));
+  @include user-select(none);
 }
 
 .mm-btn {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
-  -moz-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  @include border-radius(4px);
+  @include box-shadow(0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12));
 
   &:hover:not(:active) {
-    -webkit-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
-    -moz-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+    @include box-shadow(0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12));
   }
 
   &:active {
-    -webkit-transform: scale(.99);
-    -moz-transform: scale(.99);
-    -ms-transform: scale(.99);
-    -o-transform: scale(.99);
-    transform: scale(.99);
+    @include transform(scale(.99));
   }
 }
 
@@ -93,10 +78,7 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
 /* Checkboxes. */
 .mm-checkbox {
   position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  @include user-select(none);
 
   &:hover {
     input:focus {
@@ -116,25 +98,11 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
     margin: 0;
     outline: none;
     pointer-events: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    -o-transform: scale(1);
-    transform: scale(1);
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    -webkit-transition: opacity 300ms, transform 200ms;
-    -moz-transition: opacity 300ms, transform 200ms;
-    -ms-transition: opacity 300ms, transform 200ms;
-    -o-transition: opacity 300ms, transform 200ms;
-    transition: opacity 300ms, transform 200ms;
+    @include appearance(none);
+    @include border-radius(50%);
+    @include transform(scale(1));
+    @include box-shadow(none);
+    @include transition(opacity 300ms, transform 200ms);
 
     &:checked, &:indeterminate {
       background-color: var(--mint-color);
@@ -155,16 +123,8 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
 
     &:active {
       opacity: 1;
-      -webkit-transform: scale(0);
-      -moz-transform: scale(0);
-      -ms-transform: scale(0);
-      -o-transform: scale(0);
-      transform: scale(0);
-      -webkit-transition: transform 0s, opacity 0s;
-      -moz-transition: transform 0s, opacity 0s;
-      -ms-transition: transform 0s, opacity 0s;
-      -o-transition: transform 0s, opacity 0s;
-      transition: transform 0s, opacity 0s;
+      @include transform(scale(0));
+      @include transition(transform 0s, opacity 0s);
 
       & + span::before {
         border-color: var(--dark-color);
@@ -206,11 +166,7 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
       width: 18px;
       height: 18px;
       vertical-align: top;
-      -webkit-transition: border-color 200ms, background-color 200ms;
-      -moz-transition: border-color 200ms, background-color 200ms;
-      -ms-transition: border-color 200ms, background-color 200ms;
-      -o-transition: border-color 200ms, background-color 200ms;
-      transition: border-color 200ms, background-color 200ms;
+      @include transition(border-color 200ms, background-color 200ms);
     }
 
     &.with-error {
@@ -240,11 +196,7 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
       border: solid 2px transparent;
       border-right: none;
       border-top: none;
-      -webkit-transform: translate(3px, 4px) rotate(-45deg);
-      -moz-transform: translate(3px, 4px) rotate(-45deg);
-      -ms-transform: translate(3px, 4px) rotate(-45deg);
-      -o-transform: translate(3px, 4px) rotate(-45deg);
-      transform: translate(3px, 4px) rotate(-45deg);
+      @include transform(translate(3px, 4px) rotate(-45deg));
     }
   }
 }
@@ -269,17 +221,9 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
     background-color: transparent;
     color: var(--dark-color);
     caret-color: var(--dark-color);
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    -webkit-transition: box-shadow 150ms;
-    -moz-transition: box-shadow 150ms;
-    -ms-transition: box-shadow 150ms;
-    -o-transition: box-shadow 150ms;
-    transition: box-shadow 150ms;
+    @include border-radius(3px);
+    @include box-shadow(none);
+    @include transition(box-shadow 150ms);
 
     &:not(:focus):placeholder-shown {
       border-top-color: $inactive-border-color;
@@ -318,15 +262,11 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
     }
 
     &:focus.with-error {
-      -webkit-box-shadow: inset 4px 0 0 $invalid-shadow, inset -3px -3px 0 $invalid-shadow;
-      -moz-box-shadow: inset 4px 0 0 $invalid-shadow, inset -3px -3px 0 $invalid-shadow;
-      box-shadow: inset 4px 0 0 $invalid-shadow, inset -3px -3px 0 $invalid-shadow;
+      @include box-shadow(inset 4px 0 0 $invalid-shadow, inset -3px -3px 0 $invalid-shadow);
     }
 
     &:focus:not(.with-error) {
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
+      @include box-shadow(none);
     }
 
     &.with-error + span {
@@ -349,15 +289,8 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
       font-size: 75%;
       line-height: 1px;
       cursor: text;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      -webkit-transition: color 165ms, font-size 165ms, line-height 165ms;
-      -moz-transition: color 165ms, font-size 165ms, line-height 165ms;
-      -ms-transition: color 165ms, font-size 165ms, line-height 165ms;
-      -o-transition: color 165ms, font-size 165ms, line-height 165ms;
-      transition: color 165ms, font-size 165ms, line-height 165ms;
+      @include transition(color 165ms, font-size 165ms, line-height 165ms);
+      @include user-select(none);
 
       &:before, &:after {
         content: '';
@@ -371,18 +304,14 @@ $invalid-shadow: rgba(255, 76, 77, 0.5);
       &:before {
         margin-right: 4px;
         border-left: solid 1px transparent;
-        -webkit-border-radius: 4px 0;
-        -moz-border-radius: 4px 0;
-        border-radius: 4px 0;
+        @include border-radius(4px 0);
       }
 
       &:after {
         flex-grow: 1;
         margin-left: 4px;
         border-right: solid 1px transparent;
-        -webkit-border-radius: 0 4px;
-        -moz-border-radius: 0 4px;
-        border-radius: 0 4px;
+        @include border-radius(0 4px);
       }
     }
 

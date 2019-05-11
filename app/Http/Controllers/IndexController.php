@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
 {
     /**
-     * Return app view.
+     * Returns app view.
      *
      * @return \Illuminate\View\View
      */

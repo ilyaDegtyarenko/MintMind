@@ -28,9 +28,7 @@ class FilterInput
     public function handle(Request $request, Closure $next, $guard = null)
     {
         foreach ($request->input() as $key => $value) {
-
             if (in_array($key, $this->except, true) || !is_string($value)) continue;
-
             $request->merge([$key => $this->filterInput($value)]);
         }
 

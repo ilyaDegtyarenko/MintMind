@@ -85,12 +85,7 @@ const router = new VueRouter({
     ]
 });
 
-router.beforeEach((to, from, next) => {
-    return routeMiddleware({router, to, next});
-});
-
-router.beforeResolve((to, from, next) => {
-    return setPageTitle(to, next);
-});
+router.beforeEach((to, from, next) => routeMiddleware({router, to, next}));
+router.beforeResolve((to, from, next) => setPageTitle(to, next));
 
 export default router;

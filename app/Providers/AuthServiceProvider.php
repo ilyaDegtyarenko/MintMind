@@ -34,9 +34,7 @@ class AuthServiceProvider extends ServiceProvider
 
             try {
                 $credentials = JWT::decode($authToken, env('JWT_SECRET'), [env('JWT_ALGORITHM')]);
-
                 if (empty($userId = $credentials->user_id)) return null;
-
                 $request->merge(['credentials' => $credentials]);
 
                 return User::find($userId);

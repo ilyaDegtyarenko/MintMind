@@ -9,11 +9,8 @@
     <title></title>
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat&amp;subset=cyrillic" rel="stylesheet">
-
     <link type="text/css" rel="stylesheet" href="{{ \Illuminate\Support\Facades\URL::asset('css/app.css') }}">
-
     <script src="https://www.google.com/recaptcha/api.js?render={{ env('GOOGLE_RECAPTCHA_SITE_KEY') }}"></script>
-
     <script type="text/javascript">
 
         /* Used in "app.js". */
