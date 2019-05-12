@@ -1,9 +1,11 @@
 .DS_Store
-/storage/framework/cache/*
-/vendor
+node_modules
+/dist
 
-# Local env files
+# local env files
 .env
+.env.local
+.env.*.local
 
 # Log files
 npm-debug.log*

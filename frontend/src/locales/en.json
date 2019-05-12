@@ -1,0 +1,47 @@
+{
+  "banana": "no bananas | {n} banana | {n} bananas",
+  "app-name": "MintMind",
+  "registration": "Registration",
+  "login": "Sign in",
+  "logout": "Logout",
+  "survey-list": "Surveys",
+  "survey": "Survey",
+  "page-not-found": "Page not found",
+  "name": "Name",
+  "email": "Email",
+  "password": "Password",
+  "password-confirmation": "Password confirmation",
+  "remember": "Remember me",
+  "agreement": "User agreement",
+  "feedback": "Feedback",
+  "faq": "FAQ",
+  "privacy-policy": "Privacy policy",
+  "accept": "Accept",
+  "app-error": "An error has occurred in the application. The situation is fixed in our reports and will be considered as a matter of urgency. We apologize for the inconvenience, try to refresh the page or try again after a while",
+  "attributes": {
+    "name": "Name | Names",
+    "email": "Email | Emails",
+    "password": "Password | Passwords",
+    "agreement": "User agreement"
+  },
+  "errors": {
+    "unknown-email": "Your mail is unfamiliar to us",
+    "wrong-password": "Invalid password, check the input",
+    "unprocessable-query": "For reasons unknown to us, we are not currently able to process your request. The situation is fixed in our reports and will be considered as a matter of urgency. We apologize for the inconvenience, try to refresh the page or try again after a while",
+    "authorization-required": "You need to login",
+    "forbidden": "You do not have access to this page or to perform this operation"
+  },
+  "validation-messages": {
+    "more-than": "more than",
+    "less-than": "less than",
+    "required": "Fill in the {attribute}",
+    "size": "{attribute} cannot be {condition} {count} symbols | {attribute} cannot be {condition} {count} characters",
+    "unique": "Such {attribute} is already taken | This {attribute} is already taken",
+    "confirmed": "Confirm your {attribute}, values do not match | Confirm your {attribute}, values do not match",
+    "accepted": "Confirm {attribute}",
+    "email": "Enter a valid email address",
+    "password-regex": "Please enter a complex password. Use uppercase and lowercase letters, numbers and at least one special character from #$^+=!*()@%&. We try to protect your data as much as possible and your password is an important part of the security of your information",
+    "name-regex": "Name must contain letters, and also available numbers, dots, underscore and space",
+    "remember": "In order for us to remember you, you just need to check this box"
+  }
+}
